@@ -82,20 +82,21 @@ resolve(parent,args){
 },
         },
 //DELETE CLIENT
-deleteClient:{
-    type:ClientType,
-    args:{
-        id:{type:GraphQLNonNull(GraphQLID)},
-    },
-    resolve(parent,args){
-        Project.find({clientId: args.id}).then((projects)=>{
-            projects.forEach((project)=>{
-                project.remove();
-            });
+deleteClient: {
+      type: ClientType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        Project.find({ clientId: args.id }).then((projects) => {
+          projects.forEach((project) => {
+            project.deleteOne();
+          });
         });
-      return  Client.findByIdAndRemove(args.id);
+
+        return Client.findByIdAndRemove(args.id);
+      },
     },
-},
 //Add a project
 addProject:{
     type:ProjectType,
@@ -166,7 +167,6 @@ addProject:{
                 },
                 {new: true}
             );
-         
         },
     },
 }
