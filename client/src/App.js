@@ -27,10 +27,21 @@ const cache = new InMemoryCache({
     },
   },
 });
+// const client = new ApolloClient({
+//   uri: 'http://localhost:2000/graphql', // ✅ replace 4000 with your backend port
+//   cache,
+// });
+// 
+const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "/graphql"
+    : "http://localhost:2000/graphql";
+
 const client = new ApolloClient({
-  uri: 'http://localhost:2000/graphql', // ✅ replace 4000 with your backend port
-  cache,
+  uri: API_URL,
+  cache: new InMemoryCache(),
 });
+
 
 function App() {
   return (
