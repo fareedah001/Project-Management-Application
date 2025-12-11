@@ -9,7 +9,7 @@ const path = require("path");
 require('dotenv').config();
 const connectDB = require('./config/db');
 const {graphqlHTTP} = require('express-graphql');
-const schema = require('./schema/schema')
+const schema = require('./schema/schema');
 const PORT = process.env.PORT||2000;
 const app = express();
 
